@@ -89,11 +89,52 @@ return {
       })
     end,
   },
-  "nyoom-engineering/oxocarbon.nvim",
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+        integrations = {
+            alpha = true,
+            cmp = true,
+            flash = true,
+            gitsigns = true,
+            illuminate = true,
+            indent_blankline = { enabled = true },
+            lsp_trouble = true,
+            mason = true,
+            mini = true,
+            native_lsp = {
+              enabled = true,
+              underlines = {
+                errors = { "undercurl" },
+                hints = { "undercurl" },
+                warnings = { "undercurl" },
+                information = { "undercurl" },
+              },
+            },
+            navic = { enabled = true, custom_bg = "lualine" },
+            neotest = true,
+            noice = true,
+            notify = true,
+            neotree = true,
+            semantic_tokens = true,
+            telescope = true,
+            treesitter = true,
+            which_key = true,
+          },
+        color_overrides = {
+            mocha = {
+              base = "#000000",
+              mantle = "#010101",
+              crust = "#020202",        
+            },
+        },
+    },
+  },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "oxocarbon",
+      colorscheme = "catppuccin",
+    },
   },
-},
 }
