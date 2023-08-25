@@ -1,12 +1,11 @@
 return {{
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {"nvim-treesitter/nvim-treesitter-context", "RRethy/nvim-treesitter-endwise"},
     event = {"BufReadPost", "BufNewFile"},
+    cmd = {"TSInstall", "TSUpdate"},
     config = function()
-        local configs = require("nvim-treesitter.configs")
-        configs.setup({
-            ensure_installed = {"html", "javascript", "json", "luadoc", "luap", "markdown_inline", "tsx", "typescript",
-                                "yaml", "lua", "markdown", "rust", "css"},
+        require("nvim-treesitter.configs").setup({
+            ensure_installed = {"bash", "c", "css", "html", "json", "javascript", "luadoc", "luap", "markdown_inline",
+                                "tsx", "typescript", "lua", "markdown", "python", "rust"},
             highlight = {
                 enable = true
             },
@@ -20,7 +19,7 @@ return {{
             },
             indent = {
                 enable = true,
-                disable = {"yaml"}
+                disable = {"python"}
             },
             textobjects = {
                 select = {
@@ -41,9 +40,146 @@ return {{
         vim.opt.foldmethod = "expr"
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         vim.opt.foldenable = false
+
+        require("treesitter-context").setup({
+            max_lines = 3,
+            min_window_height = 20,
+            mode = "topline"
+        })
     end
-}, {"utilyre/sentiment.nvim"}, {"Exafunction/codeium.vim"}, {
+}, {
+    "echasnovski/mini.nvim",
+    version = false,
+    lazy = false,
+    config = function()
+        require("mini.ai").setup()
+        require("mini.basics").setup({
+            mappings = {
+                windows = true
+            }
+        })
+        require("mini.bracketed").setup()
+        local miniclue = require("mini.clue")
+        miniclue.setup({
+            triggers = {{
+                mode = "n",
+                keys = "<Leader>"
+            }, {
+                mode = "x",
+                keys = "<Leader>"
+            }, {
+                mode = "i",
+                keys = "<C-x>"
+            }, {
+                mode = "n",
+                keys = "g"
+            }, {
+                mode = "x",
+                keys = "g"
+            }, {
+                mode = "n",
+                keys = "'"
+            }, {
+                mode = "x",
+                keys = "'"
+            }, {
+                mode = "n",
+                keys = "`"
+            }, {
+                mode = "x",
+                keys = "`"
+            }, {
+                mode = "n",
+                keys = '"'
+            }, {
+                mode = "x",
+                keys = '"'
+            }, {
+                mode = "i",
+                keys = "<C-r>"
+            }, {
+                mode = "c",
+                keys = "<C-r>"
+            }, {
+                mode = "n",
+                keys = "<C-w>"
+            }, {
+                mode = "n",
+                keys = "z"
+            }, {
+                mode = "x",
+                keys = "z"
+            }, {
+                mode = "n",
+                keys = "["
+            }, {
+                mode = "n",
+                keys = "]"
+            }},
+
+            clues = {miniclue.gen_clues.builtin_completion(), miniclue.gen_clues.g(), miniclue.gen_clues.marks(),
+                     miniclue.gen_clues.registers(), miniclue.gen_clues.windows(), miniclue.gen_clues.z(), {
+                mode = "n",
+                keys = "<Leader>f",
+                desc = "+Files"
+            }, {
+                mode = "n",
+                keys = "<Leader>h",
+                desc = "+Help"
+            }, {
+                mode = "n",
+                keys = "<Leader>l",
+                desc = "+LSP"
+            }, {
+                mode = "n",
+                keys = "<Leader>t",
+                desc = "+Test"
+            }, {
+                mode = "n",
+                keys = "<Leader>x",
+                desc = "+Debug"
+            }},
+
+            window = {
+                delay = 0
+            }
+        })
+        require("mini.comment").setup()
+        require("mini.indentscope").setup({
+            symbol = "│"
+        })
+        require("mini.surround").setup({
+            mappings = {
+                add = "ys",
+                delete = "ds",
+                find = "",
+                find_left = "",
+                highlight = "",
+                replace = "cs",
+                update_n_lines = ""
+            }
+        })
+        require("mini.trailspace").setup()
+    end
+}, {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {}
+}, {
+    "utilyre/sentiment.nvim",
+    event = "VeryLazy",
+    opts = {}
+}, {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    opts = {
+        suggestion = {
+            auto_trigger = true
+        }
+    }
+}, {
     "folke/flash.nvim",
+    event = "VeryLazy",
     opts = {
         modes = {
             search = {
@@ -88,89 +224,24 @@ return {{
         desc = "Toggle flash search"
     }}
 }, {
-    "folke/noice.nvim",
+    "bennypowers/splitjoin.nvim",
+    keys = {{
+        "gj",
+        function()
+            require("splitjoin").join()
+        end,
+        desc = "Join the object under cursor"
+    }, {
+        "g,",
+        function()
+            require("splitjoin").split()
+        end,
+        desc = "Split the object under cursor"
+    }}
+}, {
+    "ellisonleao/dotenv.nvim",
     event = "VeryLazy",
     opts = {
-        lsp = {
-            override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
-                ["config.lsp.signature.enabled"] = false,
-            }
-        },
-        routes = {{
-            filter = {
-                event = "msg_show",
-                any = {{
-                    find = "%d+L, %d+B"
-                }, {
-                    find = "; after #%d+"
-                }, {
-                    find = "; before #%d+"
-                }}
-            },
-            view = "mini"
-        }},
-        presets = {
-            bottom_search = true,
-            command_palette = true,
-            long_message_to_split = true,
-            inc_rename = true
-        }
-    },
-    keys = {{
-        "<S-Enter>",
-        function()
-            require("noice").redirect(vim.fn.getcmdline())
-        end,
-        mode = "c",
-        desc = "Redirect Cmdline"
-    }, {
-        "<leader>snl",
-        function()
-            require("noice").cmd("last")
-        end,
-        desc = "Noice Last Message"
-    }, {
-        "<leader>snh",
-        function()
-            require("noice").cmd("history")
-        end,
-        desc = "Noice History"
-    }, {
-        "<leader>sna",
-        function()
-            require("noice").cmd("all")
-        end,
-        desc = "Noice All"
-    }, {
-        "<leader>snd",
-        function()
-            require("noice").cmd("dismiss")
-        end,
-        desc = "Dismiss All"
-    }, {
-        "<c-f>",
-        function()
-            if not require("noice.lsp").scroll(4) then
-                return "<c-f>"
-            end
-        end,
-        silent = true,
-        expr = true,
-        desc = "Scroll forward",
-        mode = {"i", "n", "s"}
-    }, {
-        "<c-b>",
-        function()
-            if not require("noice.lsp").scroll(-4) then
-                return "<c-b>"
-            end
-        end,
-        silent = true,
-        expr = true,
-        desc = "Scroll backward",
-        mode = {"i", "n", "s"}
-    }}
+        enable_on_load = true
+    }
 }}
