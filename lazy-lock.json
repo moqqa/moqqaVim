@@ -10,6 +10,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
+  "codeium.vim": { "branch": "main", "commit": "0b4a13613c871c66648fd1e1f33a4911a0b15e72" },
   "crates.nvim": { "branch": "main", "commit": "d5caf28aba49e81ac4099426231f3cf3c151013a" },
   "diffview.nvim": { "branch": "main", "commit": "7e5a85c186027cab1e825d018f07c350177077fc" },
   "dotenv.nvim": { "branch": "main", "commit": "efc709e3b15ed7d1db48c3f495a2d04b55d60dee" },
