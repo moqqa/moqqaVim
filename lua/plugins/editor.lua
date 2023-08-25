@@ -97,7 +97,6 @@ return {{
                 ["vim.lsp.util.stylize_markdown"] = true,
                 ["cmp.entry.get_documentation"] = true,
                 ["config.lsp.signature.enabled"] = false,
-                ["config.lsp.signature.enabled"] = false
             }
         },
         routes = {{
