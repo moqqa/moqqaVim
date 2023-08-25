@@ -215,7 +215,7 @@ return {{
         end,
         desc = "Toggle flash search"
     }}
-}, {
+}, {"Exafunction/codeium.vim"}, {
     "bennypowers/splitjoin.nvim",
     keys = {{
         "gj",
