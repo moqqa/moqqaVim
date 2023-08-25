@@ -170,14 +170,6 @@ return {{
     event = "VeryLazy",
     opts = {}
 }, {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = {
-        suggestion = {
-            auto_trigger = true
-        }
-    }
-}, {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
