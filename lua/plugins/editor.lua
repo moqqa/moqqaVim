@@ -1,11 +1,11 @@
-return {{
+return {{"nvim-treesitter/nvim-treesitter-context"}, {"nvim-treesitter/nvim-treesitter-textobjects"}, {
     "nvim-treesitter/nvim-treesitter",
     event = {"BufReadPost", "BufNewFile"},
     cmd = {"TSInstall", "TSUpdate"},
     config = function()
         require("nvim-treesitter.configs").setup({
-            ensure_installed = {"bash", "c", "css", "html", "json", "javascript", "luadoc", "luap", "markdown_inline",
-                                "tsx", "typescript", "lua", "markdown", "python", "rust"},
+            ensure_installed = {"c", "css", "html", "json", "javascript", "luadoc", "luap", "markdown_inline", "tsx",
+                                "typescript", "lua", "markdown", "python", "rust"},
             highlight = {
                 enable = true
             },
@@ -38,7 +38,9 @@ return {{
         })
 
         vim.opt.foldmethod = "expr"
+
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
         vim.opt.foldenable = false
 
         require("treesitter-context").setup({
@@ -47,128 +49,6 @@ return {{
             mode = "topline"
         })
     end
-}, {
-    "echasnovski/mini.nvim",
-    version = false,
-    lazy = false,
-    config = function()
-        require("mini.ai").setup()
-        require("mini.basics").setup({
-            mappings = {
-                windows = true
-            }
-        })
-        require("mini.bracketed").setup()
-        local miniclue = require("mini.clue")
-        miniclue.setup({
-            triggers = {{
-                mode = "n",
-                keys = "<Leader>"
-            }, {
-                mode = "x",
-                keys = "<Leader>"
-            }, {
-                mode = "i",
-                keys = "<C-x>"
-            }, {
-                mode = "n",
-                keys = "g"
-            }, {
-                mode = "x",
-                keys = "g"
-            }, {
-                mode = "n",
-                keys = "'"
-            }, {
-                mode = "x",
-                keys = "'"
-            }, {
-                mode = "n",
-                keys = "`"
-            }, {
-                mode = "x",
-                keys = "`"
-            }, {
-                mode = "n",
-                keys = '"'
-            }, {
-                mode = "x",
-                keys = '"'
-            }, {
-                mode = "i",
-                keys = "<C-r>"
-            }, {
-                mode = "c",
-                keys = "<C-r>"
-            }, {
-                mode = "n",
-                keys = "<C-w>"
-            }, {
-                mode = "n",
-                keys = "z"
-            }, {
-                mode = "x",
-                keys = "z"
-            }, {
-                mode = "n",
-                keys = "["
-            }, {
-                mode = "n",
-                keys = "]"
-            }},
-
-            clues = {miniclue.gen_clues.builtin_completion(), miniclue.gen_clues.g(), miniclue.gen_clues.marks(),
-                     miniclue.gen_clues.registers(), miniclue.gen_clues.windows(), miniclue.gen_clues.z(), {
-                mode = "n",
-                keys = "<Leader>f",
-                desc = "+Files"
-            }, {
-                mode = "n",
-                keys = "<Leader>h",
-                desc = "+Help"
-            }, {
-                mode = "n",
-                keys = "<Leader>l",
-                desc = "+LSP"
-            }, {
-                mode = "n",
-                keys = "<Leader>t",
-                desc = "+Test"
-            }, {
-                mode = "n",
-                keys = "<Leader>x",
-                desc = "+Debug"
-            }},
-
-            window = {
-                delay = 0
-            }
-        })
-        require("mini.comment").setup()
-        require("mini.indentscope").setup({
-            symbol = "│"
-        })
-        require("mini.surround").setup({
-            mappings = {
-                add = "ys",
-                delete = "ds",
-                find = "",
-                find_left = "",
-                highlight = "",
-                replace = "cs",
-                update_n_lines = ""
-            }
-        })
-        require("mini.trailspace").setup()
-    end
-}, {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {}
-}, {
-    "utilyre/sentiment.nvim",
-    event = "VeryLazy",
-    opts = {}
 }, {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -215,7 +95,15 @@ return {{
         end,
         desc = "Toggle flash search"
     }}
-}, {"Exafunction/codeium.vim"}, {
+}, {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    opts = {
+        suggestion = {
+            auto_trigger = true
+        }
+    }
+}, {
     "bennypowers/splitjoin.nvim",
     keys = {{
         "gj",
@@ -230,10 +118,6 @@ return {{
         end,
         desc = "Split the object under cursor"
     }}
-}, {
-    "ellisonleao/dotenv.nvim",
-    event = "VeryLazy",
-    opts = {
-        enable_on_load = true
-    }
-}}
+},
+ 
+}
