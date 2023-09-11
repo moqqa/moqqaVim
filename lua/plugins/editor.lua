@@ -119,5 +119,14 @@ return {{"nvim-treesitter/nvim-treesitter-context"}, {"nvim-treesitter/nvim-tree
         desc = "Split the object under cursor"
     }}
 },
- 
+{
+    'nvim-telescope/telescope.nvim',
+    opts = {
+        pickers = {
+            colorscheme = {
+                enable_preview = true,
+            },
+        },
+    },
+},
 }
