@@ -45,9 +45,9 @@ return {
         ▀▀  █▪▀▀▀ ▀█▄▀▪·▀▀█. ·▀▀█.  ▀  ▀ 
               git@github:moqqa/        
       ]]
-  
+
       logo = string.rep("\n", 8) .. logo .. "\n\n"
-  
+
       local opts = {
         theme = "doom",
         hide = {
@@ -76,12 +76,12 @@ return {
           end,
         },
       }
-  
+
       for _, button in ipairs(opts.config.center) do
         button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
         button.key_format = "  %s"
       end
-  
+
       -- open dashboard after closing lazy
       if vim.o.filetype == "lazy" then
         vim.api.nvim_create_autocmd("WinClosed", {
@@ -94,7 +94,7 @@ return {
           end,
         })
       end
-  
+
       return opts
     end,
   },
