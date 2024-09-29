@@ -7,7 +7,7 @@ return {
         "linrongbin16/lsp-progress.nvim",
         opts = {},
       },
-      -- "KadoBOT/nvim-spotify",
+      "KadoBOT/nvim-spotify",
     },
     opts = {
       options = {
@@ -29,7 +29,7 @@ return {
         lualine_c = { "require('lsp-progress').progress()" },
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {}, --"require('nvim-spotify').status.listen()"
+        lualine_z = { "require('nvim-spotify').status.listen()" },
       },
     },
   },
@@ -99,7 +99,8 @@ return {
     end,
   },
   {
-    "nyoom-engineering/oxocarbon.nvim",
+    "rose-pine/neovim",
+    name = "rose-pine",
   },
   -- {
   --   "xiyaowong/transparent.nvim",
@@ -110,7 +111,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "oxocarbon",
+      colorscheme = "rose-pine-moon",
     },
   },
 }
