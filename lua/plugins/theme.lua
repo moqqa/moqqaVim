@@ -99,8 +99,7 @@ return {
     end,
   },
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    "nyoom-engineering/oxocarbon.nvim",
   },
   -- {
   --   "xiyaowong/transparent.nvim",
@@ -111,7 +110,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine-moon",
+      colorscheme = "oxocarbon",
     },
   },
 }
